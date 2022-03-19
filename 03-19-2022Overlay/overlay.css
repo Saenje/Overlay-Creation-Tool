@@ -45,11 +45,7 @@ body > * {
     color: white;
 }
 
-#subName {
-    padding: 0px 0px 0px 0px;
-}
-
-.subSide {
+.subSide  {
     display: inline-flex;
     padding: 0px 0px 0px 0px;
 }
@@ -59,12 +55,20 @@ body > * {
     padding: 0px 0px 0px 0px;
 }
 
-#cheerName {
-    padding: 0px 0px 0px 0px;
-}
-
-#progressBar {
+/* #progressBar {
     position: absolute;
     top: 0;
+    left: 0;
+} */
+
+#supporterWorkspace {
+    position: absolute;
+	display: flex;
+    vertical-align: middle;
+}
+
+canvas {
+    position: absolute;
+    top: 160;
     left: 0;
 }

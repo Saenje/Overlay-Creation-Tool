@@ -2,26 +2,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.js"></script>
-        
+       
+
+
 <body>  
 
-    <div class="subSide">
-        <div id="subName" class="supporterNames">Last Subscriber</div>
-        <div class="separator">■</div>
-        <div id="subMonths" class="supportNumerical">6x</div>
-    </div>
+    <!-- <div id="supporterWorkspace"> -->
 
-    <div>
-        <div><img src="ShroudedLogo.png" id="defaultAnimation"></div>
-        <div id="bar"></div>
-        <div id="progressPercentage"></div>
-    </div>
+        <span class="subSide">
+            <div id="subName" class="supporterNames">Last Subscriber</div>
+            <div class="separator">■</div>
+            <div id="subMonths" class="supportNumerical">6x</div>
+        </span>    
+        
+        <div>
+            <div><img src="ShroudedLogo.png" id="defaultAnimation"></div>
+            <div id="bar"></div>
+            <div id="progressPercentage"></div>
+        </div>
 
-    <div class="cheerSide">
-        <div id="cheerTotal" class="supportNumerical">1,500</div>
-        <div class="separator">■</div>
-        <div id="cheerName" class="supporterNames">Last Cheer</div>
-    </div>
+        <span class="cheerSide">
+            <div id="cheerTotal" class="supportNumerical">1,500</div>
+            <div class="separator">■</div>
+            <div id="cheerName" class="supporterNames">Last Cheer</div>
+        </span>
+
+    <!-- </div> -->
+
+    <canvas id="alertUsername"></canvas>
 
 <link rel="stylesheet" href="overlay.css">
 <script src="overlay.js"></script>

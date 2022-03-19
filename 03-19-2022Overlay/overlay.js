@@ -29,9 +29,13 @@ Bar Range: ${range},
 Bar RGB: ${barRGB}`);
 
 //Progress bar canvas
+let barWidth = 128;
+let barHeight = 128;
+
+//Progress bar canvas
 function setup() {
     		angleMode(DEGREES);
-			let canvas = createCanvas(128, 128);
+			let canvas = createCanvas(barWidth, barHeight);
 			let x = 4+(windowWidth - width) / 2;
 			let y = 6+(windowHeight - height) / 2;
 			canvas.position(x, y);
@@ -42,38 +46,38 @@ function draw() {
 			stroke(128, 128, 128, 50);
 			strokeWeight(trackThickness);
 			noFill();
-			arc(64, 64, 96, 96, progressBounds.start, progressBounds.end);
+			arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, progressBounds.end);
 		
 			stroke(barRed, barGreen, barBlue);
 			strokeWeight(barThickness);
 			noFill();
-			arc(64, 64, 96, 96, progressBounds.start, percentage);
+			arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, percentage);
 			noLoop();
 }
 
-// //Frame for supporter text used in alert.
-// const alertFrame = document.getElementById('frame');
-// const ctx = alertFrame.getContext('2d');
-// alertFrame.width = window.innerWidth;
-// alertFrame.height = window.innerHeight;
-// let particleArray = [];
+//Frame for supporter text used in alert.
+const canvas = document.getElementById('alertUsername');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let particleArray = [];
 
-// //Blade path for cutting supporter text.
-// let blade = {
-// 	x: null,
-// 	y: null,
-// 	radius: 50
-// }
+//Blade path for cutting through supporter text.
+let blade = {
+	x: null,
+	y: null,
+	radius: 50
+}
 
-// window.addEventListener('mousemove', function(event){
-// 	blade.x = event.x;
-// 	blade.y = event.y;
-// 	console.log(blade.x, blade.y)
-// });
+window.addEventListener('mousemove', function(event){
+	blade.x = event.x;
+	blade.y = event.y;
+	console.log(blade.x, blade.y)
+});
 
-// ctx.fillStyle = 'white';
-// ctx.font = '30px Verdana';
-// ctx.fillText('A', 0, 40);
+ctx.fillStyle = 'white';
+ctx.font = '30px Verdana';
+ctx.fillText('A', 0, 40);
 
 
 
