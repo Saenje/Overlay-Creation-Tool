@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+}
+
+body > * {
+    flex: 0 0 auto;
+    font-family: Titillium Web;
+    font-weight: 800;
+}
+
+#defaultAnimation {
+    filter: drop-shadow(0px 0px 4px rgba(120, 255, 255));
+    filter: drop-shadow(0px 0px 6px rgba(80, 192, 180));
+    filter: drop-shadow(0px 0px 8px rgb(0, 96, 120));
+    height: 80px;
+}
+
+.supporterNames {
+    filter: drop-shadow(1.5px 1.5px 2.5px rgba(0, 0, 0));
+    margin: 0px 16px 0px 16px;
+    color: rgb(0, 255, 255);
+}
+
+.supportNumerical {
+    filter: drop-shadow(1.5px 1.5px 2.5px rgba(0, 0, 0));
+    margin: 0px 16px 0px 16px;
+    color:white;
+}
+
+.separator {
+    filter: drop-shadow(1.5px 1.5px 2.5px rgba(0, 0, 0));
+    margin: 0px;
+    color: white;
+}
+
+#subName {
+    padding: 0px 0px 0px 0px;
+}
+
+.subSide {
+    display: inline-flex;
+    padding: 0px 0px 0px 0px;
+}
+
+.cheerSide {
+    display: inline-flex;
+    padding: 0px 0px 0px 0px;
+}
+
+#cheerName {
+    padding: 0px 0px 0px 0px;
+}
+
+#progressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
