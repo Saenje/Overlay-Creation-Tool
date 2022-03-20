@@ -1,7 +1,7 @@
 const 	subMultiplier = 1,
 		bitMultiplier = 1,
 		rotation = 90,
-		gap = 20,
+		gap = 36,
 		range = 360-gap,
 		increment = range/100,
 		subWeight = 10*subMultiplier, 
@@ -13,17 +13,20 @@ const 	subMultiplier = 1,
 
 
 let 	subQuantity = 1,
-		bitQuantity = 500,
+		bitQuantity = 569,
 		supportMultiplier = [(subWeight*subQuantity)+(bitWeight*bitQuantity)]*increment,
-		percentage = progressBounds.start+supportMultiplier,
+		currentProgress = progressBounds.start+supportMultiplier,
+		percentage = supportMultiplier / increment;
+		integerPercentage = parseInt(percentage)
 		barThickness = 2 + (supportMultiplier * 2 / range),
 		trackThickness = 1 + (supportMultiplier * 2 / range);
-		barRed = 0 + (supportMultiplier * 40 / range);
+		barRed = 0 + (supportMultiplier * 80 / range);
 		barGreen = 120 + (supportMultiplier * 175 / range);
 		barBlue = 120 + (supportMultiplier * 175 / range);
 		barRGB = `${barRed}, ${barGreen}, ${barBlue}`;
 
-console.log(`Bar Increment/%: ${increment},
+console.log(`Bar Increment: ${increment},
+Percentage Completed: ${percentage},
 Support Multiplier: ${supportMultiplier},
 Bar Range: ${range},
 Bar RGB: ${barRGB}`);
@@ -54,13 +57,16 @@ function draw() {
 			stroke(barRed, barGreen, barBlue);
 			strokeWeight(barThickness);
 			noFill();
-			arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, percentage);
+			arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, currentProgress);
 			noLoop();
 }
 
+const progressPercentage = document.getElementById('progressPercentage');
+progressPercentage.innerHTML = `${integerPercentage}`;
+
 //Frame for supporter text used in alert.
-const canvas = document.getElementById('alertUsername');
-const alertUsername = canvas.getContext('2d');
+const canvas = document.getElementById('particleCanvas');
+const particleCanvas = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
@@ -71,27 +77,30 @@ let blade = {
 	y: null,
 }
 
-window.addEventListener('mousemove', function(shiftParticles){
-	blade.x = shiftParticles.x
-	blade.y = shiftParticles.y
+window.addEventListener('mousemove', function(position){
+	blade.x = position.x
+	blade.y = position.y
 console.log(blade.x, blade.y)
 })
 
+particleCanvas.fillStyle = 'Green';
+particleCanvas.font = '30px Tahoma';
+particleCanvas.fillText('Alert Username', 222, 680, 1920);
+const textData = particleCanvas.getImageData(0, 0, 100, 100)
 
 
 
-
-// window.addEventListener('mousemove', function(event){
-// 	blade.x = event.x;
-// 	blade.y = event.y;
+// window.addEventListener('mousemove', function(position){
+// 	blade.x = position.x;
+// 	blade.y = position.y;
 // 	blade.radius = 150;
 // 	// console.log(blade.x, blade.y)
 // });
 
-// alertUsername.fillStyle = 'Green';
-// alertUsername.font = '30px Tahoma';
-// alertUsername.fillText('Alert Username', 0, 30);
-// const data = alertUsername.getImageData(0, 0, 100, 100);
+// particleCanvas.fillStyle = 'Green';
+// particleCanvas.font = '30px Tahoma';
+// particleCanvas.fillText('Alert Username', 0, 30);
+// const data = particleCanvas.getImageData(0, 0, 100, 100);
 
 // class Particle {
 // 	constructor(x, y){
@@ -103,11 +112,11 @@ console.log(blade.x, blade.y)
 // 		this.density = (Math.random() * 30) + 1;
 // 	}
 // 	draw(){
-// 		alertUsername.fillStyle = 'cyan';
-// 		alertUsername.beginPath();
-// 		alertUsername.arc(this.x, this.y, this.size, 0, Math.PI *2);
-// 		alertUsername.closePath();
-// 		alertUsername.fill();
+// 		particleCanvas.fillStyle = 'cyan';
+// 		particleCanvas.beginPath();
+// 		particleCanvas.arc(this.x, this.y, this.size, 0, Math.PI *2);
+// 		particleCanvas.closePath();
+// 		particleCanvas.fill();
 // 	}
 // 	update(){
 // 		let dx = blade.x - this.x;
@@ -143,7 +152,7 @@ console.log(blade.x, blade.y)
 // console.log(particleArray);
 
 // function animate(){
-// 	alertUsername.clearRect(0, 0, canvas.width, canvas.height);
+// 	particleCanvas.clearRect(0, 0, canvas.width, canvas.height);
 // 	for (let i = 0; i < particleArray.length; i++){
 // 		particleArray[i].draw();
 // 		particleArray[i].update();
