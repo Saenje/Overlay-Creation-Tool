@@ -12,7 +12,7 @@ const 	subMultiplier = 1,
 		};
 
 
-let 	subQuantity = 2,
+let 	subQuantity = 1,
 		bitQuantity = 500,
 		supportMultiplier = [(subWeight*subQuantity)+(bitWeight*bitQuantity)]*increment,
 		percentage = progressBounds.start+supportMultiplier,
@@ -29,15 +29,18 @@ Bar Range: ${range},
 Bar RGB: ${barRGB}`);
 
 //Progress bar canvas
+document.querySelector('#defaultAnimation').getBoundingClientRect().left // X
+document.querySelector('#defaultAnimation').getBoundingClientRect().top // X
+let barRect = defaultAnimation.getBoundingClientRect();
+console.log(barRect)
 let barWidth = 128;
 let barHeight = 128;
 
-//Progress bar canvas
 function setup() {
     		angleMode(DEGREES);
 			let canvas = createCanvas(barWidth, barHeight);
-			let x = 4+(windowWidth - width) / 2;
-			let y = 6+(windowHeight - height) / 2;
+			let x = (windowWidth - width) / 2;
+			let y = (windowHeight - height) / 2;
 			canvas.position(x, y);
 }
 
@@ -57,7 +60,7 @@ function draw() {
 
 //Frame for supporter text used in alert.
 const canvas = document.getElementById('alertUsername');
-const ctx = canvas.getContext('2d');
+const alertUsername = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
@@ -66,19 +69,78 @@ let particleArray = [];
 let blade = {
 	x: null,
 	y: null,
-	radius: 50
 }
 
 window.addEventListener('mousemove', function(event){
 	blade.x = event.x;
 	blade.y = event.y;
-	console.log(blade.x, blade.y)
+	blade.radius = 150;
+	// console.log(blade.x, blade.y)
 });
 
-ctx.fillStyle = 'white';
-ctx.font = '30px Verdana';
-ctx.fillText('A', 0, 40);
+alertUsername.fillStyle = 'Green';
+alertUsername.font = '30px Tahoma';
+alertUsername.fillText('Alert Username', 0, 30);
+const data = alertUsername.getImageData(0, 0, 100, 100);
 
+class Particle {
+	constructor(x, y){
+		this.x = x;
+		this.y = y;
+		this.size = 3;
+		this.baseX = this.x;
+		this.baseY = this.y;
+		this.density = (Math.random() * 30) + 1;
+	}
+	draw(){
+		alertUsername.fillStyle = 'cyan';
+		alertUsername.beginPath();
+		alertUsername.arc(this.x, this.y, this.size, 0, Math.PI *2);
+		alertUsername.closePath();
+		alertUsername.fill();
+	}
+	update(){
+		let dx = blade.x - this.x;
+		let dy = blade.y - this.y;
+		let distance = Math.sqrt(dx * dx + dy * dy);
+		let forceDirectionX = dx / distance;
+		let forceDirectionY = dy / distance;
+		let maxDistance = blade.radius;
+		let force = (maxDistance - distance) / maxDistance;
+		let directionX = forceDirectionX * force * this.density;
+		let directionY = forceDirectionY * force * this.density;
+
+		if (distance < blade.radius){
+			this.x -= directionX;
+			this.y -= directionY;
+		} else {
+			this.size = 3;
+		}
+	}
+}
+
+function initialize() {
+	particleArray = [];
+	for (let i = 0; i < 1000; i++){
+		let x = Math.random() * canvas.width;
+		let y = Math.random() * canvas.height;
+		particleArray.push(new Particle(x, y));
+	}
+
+}
+
+initialize();
+console.log(particleArray);
+
+function animate(){
+	alertUsername.clearRect(0, 0, canvas.width, canvas.height);
+	for (let i = 0; i < particleArray.length; i++){
+		particleArray[i].draw();
+		particleArray[i].update();
+	}
+	requestAnimationFrame(animate);
+}
+animate();
 
 
 

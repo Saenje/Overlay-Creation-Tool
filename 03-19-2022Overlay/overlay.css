@@ -8,8 +8,6 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
-    box-sizing: border-box;
     overflow: hidden;
     background-color: rgb(0, 0, 0);
 }
@@ -21,10 +19,15 @@ body > * {
 }
 
 #defaultAnimation {
+    border-color: red;
     filter: drop-shadow(0px 0px 4px rgba(120, 255, 255));
     filter: drop-shadow(0px 0px 6px rgba(80, 192, 180));
     filter: drop-shadow(0px 0px 8px rgb(0, 96, 120));
+    display: inline-flex;
+    width: 80px;
     height: 80px;
+	position: absolute;
+    transform: translate(-50%,-50%);
 }
 
 .supporterNames {
@@ -42,17 +45,26 @@ body > * {
 .separator {
     filter: drop-shadow(1.5px 1.5px 2.5px rgba(0, 0, 0));
     margin: 0px;
+    transform: translate(0%,-10%);
     color: white;
 }
 
 .subSide  {
+    top: 50%;
+    right: 50%;
+    position: absolute;
     display: inline-flex;
-    padding: 0px 0px 0px 0px;
+    padding: 0px 54px 0px 0px;
+    transform: translate(0%,-50%)
 }
 
 .cheerSide {
+    top: 50%;
+    left: 50%;
+    position: absolute;
     display: inline-flex;
-    padding: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 54px;
+    transform: translate(0%,-50%)
 }
 
 /* #progressBar {
@@ -61,14 +73,31 @@ body > * {
     left: 0;
 } */
 
-#supporterWorkspace {
+canvas {
     position: absolute;
-	display: flex;
+}
+
+.verticalHair {
+    left: 50%;
+    width: 1px;
+    height: 1080px;
+    background-color: white;
+    position: absolute;
     vertical-align: middle;
 }
 
-canvas {
+.horizontalHair {
+    top: 50%;
+    width: 1920px;
+    height: 1px;
+    background-color: white;
     position: absolute;
-    top: 160;
-    left: 0;
+    vertical-align: middle;
 }
+
+/* #alertUsername {
+    top: 50%;
+    left: 50%;
+    color: white;
+    position: absolute;
+} */
