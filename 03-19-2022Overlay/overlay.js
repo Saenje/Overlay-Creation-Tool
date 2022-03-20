@@ -1,7 +1,7 @@
 const 	subMultiplier = 1,
 		bitMultiplier = 1,
 		rotation = 90,
-		gap = 36,
+		gap = 56,
 		range = 360-gap,
 		increment = range/100,
 		subWeight = 10*subMultiplier, 
@@ -12,12 +12,12 @@ const 	subMultiplier = 1,
 		};
 
 
-let 	subQuantity = 1,
-		bitQuantity = 569,
+let 	subQuantity = 9,
+		bitQuantity = 500,
 		supportMultiplier = [(subWeight*subQuantity)+(bitWeight*bitQuantity)]*increment,
 		currentProgress = progressBounds.start+supportMultiplier,
 		percentage = supportMultiplier / increment;
-		integerPercentage = parseInt(percentage)
+		roundedPercentage = percentage.toFixed(2);
 		barThickness = 2 + (supportMultiplier * 2 / range),
 		trackThickness = 1 + (supportMultiplier * 2 / range);
 		barRed = 0 + (supportMultiplier * 80 / range);
@@ -62,7 +62,7 @@ function draw() {
 }
 
 const progressPercentage = document.getElementById('progressPercentage');
-progressPercentage.innerHTML = `${integerPercentage}`;
+progressPercentage.innerHTML = `${roundedPercentage}`;
 
 //Frame for supporter text used in alert.
 const canvas = document.getElementById('particleCanvas');
