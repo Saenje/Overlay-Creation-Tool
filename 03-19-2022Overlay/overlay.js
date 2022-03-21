@@ -128,12 +128,12 @@ class Particle {
 		} else {
 			if (this.x !== this.baseX){
 				let dx = this.x - this.baseX;
-				this.x -= dx/160;
+				this.x += dx/160;
 				this.size = 1;
 			}
 			if (this.y !== this.baseY){
 				let dy = this.y - this.baseY;
-				this.y -= dy/160;
+				this.y += dy/160;
 				this.size = 1;
 			}
 			this.size = 1.4;
