@@ -73,7 +73,7 @@ body > * {
     left: 50%;
     position: absolute;
     display: inline-flex;
-    padding: 0px 0px 0px 54px;
+    padding: 0px 0px 0px 48px;
     transform: translate(0%,-50%)
 }
 

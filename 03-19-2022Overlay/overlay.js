@@ -87,7 +87,7 @@ console.log(blade.x, blade.y)
 })
 
 particleCanvas.fillStyle = 'green';
-particleCanvas.font = '32px Tahoma';
+particleCanvas.font = '64px Tahoma';
 particleCanvas.fillText('Alert Username', 30, 72, 2560);
 // particleCanvas.strokeStyle = 'white';
 // particleCanvas.strokeRect(0, 0, 400, 400)
@@ -122,21 +122,26 @@ class Particle {
 		let directionX = forceDirectionX * force * this.denisty;
 		let directionY = forceDirectionY * force * this.denisty;
 		if (distance < blade.radius){
-			this.size = 1;
+			this.size = 2;
 			this.x -= directionX;
 			this.y -= directionY;
 		} else {
 			if (this.x !== this.baseX){
 				let dx = this.x - this.baseX;
-				this.x += dx/160;
-				this.size = 1;
+				this.x -= dx/40;
+				this.size = Math.random() * 4;
+				if (dx < 1){
+					this.size = 2;
+				}
 			}
 			if (this.y !== this.baseY){
 				let dy = this.y - this.baseY;
-				this.y += dy/160;
-				this.size = 1;
+				this.y -= dy/40;
+				this.size = Math.random() * 4;
+				if (dy < 1){
+					this.size = 2;
+				}
 			}
-			this.size = 1.4;
 		}
 	}
 }
@@ -148,7 +153,7 @@ function initialize() {
 			if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x + 4) + 3] > 208){
 				let positionX = x + adjustX;
 				let positionY = y + adjustY;
-				particleArray.push(new Particle(positionX * 0.6, positionY * 2.4));
+				particleArray.push(new Particle(positionX * 0.3, positionY * 1.2));
 			}
 		}
 	}
