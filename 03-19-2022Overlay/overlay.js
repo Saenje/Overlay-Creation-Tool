@@ -70,14 +70,14 @@ const particleCanvas = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-let adjustX = 30;
-let adjustY = 240;
+let adjustX = -30;
+let adjustY = 360;
 
 //Blade path for cutting through supporter text.
 const blade = {
 	x: null,
 	y: null,
-	radius: 20
+	radius: 12
 }
 
 window.addEventListener('mousemove', function(position){
@@ -87,7 +87,7 @@ console.log(blade.x, blade.y)
 })
 
 particleCanvas.fillStyle = 'green';
-particleCanvas.font = '64px Tahoma';
+particleCanvas.font = '48px Tahoma';
 particleCanvas.fillText('Alert Username', 30, 72, 2560);
 // particleCanvas.strokeStyle = 'white';
 // particleCanvas.strokeRect(0, 0, 400, 400)
@@ -98,14 +98,16 @@ class Particle {
 		this.x = x;
 		this.y = y;
 		this.size = 3;
+		this.color = 'cyan';
 		//saving position for particles to return to
+		this.baseColor = this.color;
 		this.baseX = this.x;
 		this.baseY = this.y;
 		this.denisty = (Math.random() * 80) + 1;
 		
 	}
 	draw(){
-		particleCanvas.fillStyle = 'cyan';
+		particleCanvas.fillStyle = this.color;
 		particleCanvas.beginPath();
 		particleCanvas.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 		particleCanvas.closePath();
@@ -122,26 +124,31 @@ class Particle {
 		let directionX = forceDirectionX * force * this.denisty;
 		let directionY = forceDirectionY * force * this.denisty;
 		if (distance < blade.radius){
-			this.size = 2;
+			this.color = 'rgb(128, 0, 0)';
+			this.size = Math.random() * 2;
 			this.x -= directionX;
 			this.y -= directionY;
 		} else {
 			if (this.x !== this.baseX){
 				let dx = this.x - this.baseX;
-				this.x -= dx/40;
-				this.size = Math.random() * 4;
+				this.x += dx/160;
+				this.size = Math.random() * 3;
 				if (dx < 1){
-					this.size = 2;
+					this.size = Math.random() * 3;
 				}
 			}
 			if (this.y !== this.baseY){
 				let dy = this.y - this.baseY;
-				this.y -= dy/40;
-				this.size = Math.random() * 4;
+				this.y += dy/160;
+				this.size = Math.random() * 3;
 				if (dy < 1){
-					this.size = 2;
+					this.size = Math.random() * 3;
 				}
 			}
+		}
+		if (distance < blade.radius + 8){
+			this.size = Math.random() * 2;
+			this.color = 'rgb(128, 0, 0)';
 		}
 	}
 }
@@ -153,7 +160,7 @@ function initialize() {
 			if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x + 4) + 3] > 208){
 				let positionX = x + adjustX;
 				let positionY = y + adjustY;
-				particleArray.push(new Particle(positionX * 0.3, positionY * 1.2));
+				particleArray.push(new Particle(positionX * 0.45, positionY * 1.8));
 			}
 		}
 	}
