@@ -11,7 +11,6 @@ const 	subMultiplier = 1,
 			end: gap / 2+ rotation + range
 		};
 
-
 let 	subQuantity = 3,
 		bitQuantity = 364,
 		supportMultiplier = [(subWeight * subQuantity) + (bitWeight * bitQuantity)] * increment,
@@ -24,6 +23,14 @@ let 	subQuantity = 3,
 		barGreen = 120 + (supportMultiplier * 175 / range);
 		barBlue = 120 + (supportMultiplier * 175 / range);
 		barRGB = `${barRed}, ${barGreen}, ${barBlue}`;
+
+function randomColor() {
+	let r = parseInt(Math.random()*256);
+	let g = parseInt(Math.random()*256);
+	let b = parseInt(Math.random()*256);
+	console.log(`rgb(${r}, ${g}, ${b})`)
+	return `rgb(${r}, ${g}, ${b})`
+}
 
 console.log(`Bar Increment: ${increment},
 Percentage Completed: ${percentage},
@@ -70,8 +77,8 @@ const particleCanvas = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-let adjustX = -30;
-let adjustY = 360;
+let adjustX = 0;
+let adjustY = 240;
 
 //Blade path for cutting through supporter text.
 const blade = {
@@ -87,24 +94,26 @@ console.log(blade.x, blade.y)
 })
 
 particleCanvas.fillStyle = 'green';
-particleCanvas.font = '48px Tahoma';
-particleCanvas.fillText('Alert Username', 30, 72, 2560);
+particleCanvas.font = '56px Tahoma';
+particleCanvas.fillText('Extremely Long Username', 0, 44, canvas.width * 2);
+
+
+
 // particleCanvas.strokeStyle = 'white';
-// particleCanvas.strokeRect(0, 0, 400, 400)
-const textCoordinates = particleCanvas.getImageData(0, 0, 2160, 2160);
+// particleCanvas.strokeRect(2, 0, canvas.width-4, 47)
+const textCoordinates = particleCanvas.getImageData(0, 0, canvas.width*4, 2160);
 
 class Particle {
 	constructor(x, y){
 		this.x = x;
 		this.y = y;
-		this.size = 3;
-		this.color = 'cyan';
+		this.size = 1;
+		this.color = randomColor();
 		//saving position for particles to return to
 		this.baseColor = this.color;
 		this.baseX = this.x;
 		this.baseY = this.y;
 		this.denisty = (Math.random() * 80) + 1;
-		
 	}
 	draw(){
 		particleCanvas.fillStyle = this.color;
@@ -124,34 +133,35 @@ class Particle {
 		let directionX = forceDirectionX * force * this.denisty;
 		let directionY = forceDirectionY * force * this.denisty;
 		if (distance < blade.radius){
-			this.color = 'rgb(128, 0, 0)';
-			this.size = Math.random() * 2;
+			this.color = randomColor();
+			this.size = Math.random() * 4;
 			this.x -= directionX;
 			this.y -= directionY;
 		} else {
 			if (this.x !== this.baseX){
 				let dx = this.x - this.baseX;
-				this.x += dx/160;
-				this.size = Math.random() * 3;
+				this.x += dx/1200;
+				this.size = Math.random() * 4;
 				if (dx < 1){
-					this.size = Math.random() * 3;
+					this.size = Math.random() * 4;
 				}
 			}
 			if (this.y !== this.baseY){
 				let dy = this.y - this.baseY;
-				this.y += dy/160;
-				this.size = Math.random() * 3;
+				this.y += dy/1200;
+				this.size = Math.random() * 4;
 				if (dy < 1){
-					this.size = Math.random() * 3;
+					this.size = Math.random() * 4;
 				}
 			}
 		}
 		if (distance < blade.radius + 8){
-			this.size = Math.random() * 2;
-			this.color = 'rgb(128, 0, 0)';
+			this.size = Math.random() * 3;
+			this.color = randomColor();
 		}
 	}
 }
+
 
 function initialize() {
 	particleArray = [];
@@ -160,7 +170,7 @@ function initialize() {
 			if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x + 4) + 3] > 208){
 				let positionX = x + adjustX;
 				let positionY = y + adjustY;
-				particleArray.push(new Particle(positionX * 0.45, positionY * 1.8));
+				particleArray.push(new Particle(positionX * 0.25, positionY * 1));
 			}
 		}
 	}
