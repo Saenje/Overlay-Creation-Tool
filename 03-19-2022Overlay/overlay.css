@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap);
+
 * {
     margin: 0;
     padding: 0;
@@ -102,4 +104,11 @@ canvas {
 #particleCanvas {
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
+}
+
+#testdiv {
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    color: white;
+    padding-top: 192px;
 }
