@@ -25,10 +25,17 @@ let 	subQuantity = 1,
 		barRGB = `${barRed}, ${barGreen}, ${barBlue}`;
 
 function randomColor() {
-	let r = parseInt(Math.random()*192);
-	let g = parseInt(Math.random()*256)+128;
-	let b = parseInt(Math.random()*256)+128;
-	let colorOpacity = parseInt(Math.random()*256)+128;
+	let r = null;
+	let g = parseInt(Math.random()*256)+192;
+	let b = parseInt(Math.random()*256)+192;
+	if (g > 240){
+		if (b > 240){
+			r = 255;
+		}
+	} else {
+		r = 0;
+	}
+	let colorOpacity = (parseInt(Math.random()*256)+128)/255;
 	return `rgba(${r}, ${g}, ${b}, ${colorOpacity})`
 }
 
@@ -79,20 +86,17 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
 let adjustX = 0;
-let adjustY = 320;
+let adjustY = 400;
+
 
 //Blade path for cutting through supporter text.
 const blade = {
 	x: null,
 	y: null,
-	radius: 32
+	radius: 16,
+	paintRadius: 64,
+	absorbRadius: 64
 }
-
-let inputFont = new FontFace(
-	"Titillium",
-	"url(https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap)"
-  );
-let inputText = 'Extremely Long Username';
 
 window.addEventListener('mousemove', function(position){
 	blade.x = position.x;
@@ -100,12 +104,17 @@ window.addEventListener('mousemove', function(position){
 // console.log(blade.x, blade.y)
 })
 
+
+let inputText = 'Extremely Long Username';
+
 particleCanvas.fillStyle = 'green';
-particleCanvas.font = '24px Tahoma';
-particleCanvas.fillText(inputText, 32, 64);
-particleCanvas.strokeStyle = 'white';
-particleCanvas.strokeRect(4, 0, canvas.width-16, 96)
+particleCanvas.font = "32px 'Titillium Web'";
+particleCanvas.fillText(inputText, 0, 32);
+// particleCanvas.strokeStyle = 'white';
+// particleCanvas.strokeRect(4, 0, canvas.width-250, 40)
 const textCoordinates = particleCanvas.getImageData(0, 0, canvas.width*4, 2160);
+
+particleCanvas.fillText
 
 let canvasCenter = {
 	x: window.innerWidth/2,
@@ -116,7 +125,7 @@ class Particle {
 	constructor(x, y, opacity){
 		this.x = x;
 		this.y = y;
-		this.size = 2;
+		this.size = 1;
 		this.red = 0;
 		this.green = 255;
 		this.blue = 255;
@@ -142,38 +151,50 @@ class Particle {
 		let distance = Math.sqrt(dx * dx + dy * dy)
 		let forceDirectionX = dx / distance;
 		let forceDirectionY = dy / distance;
-		let maxDistance = blade.radius;
+		let maxDistance = blade.radius*4;
 		let force = (maxDistance - distance) / maxDistance;
 		let directionX = forceDirectionX * force * this.denisty;
 		let directionY = forceDirectionY * force * this.denisty;
-		if (distance < blade.radius){
-			this.color = 'white';
-			this.size = Math.random() * 3;
-			this.x -= directionX;
-			this.y -= directionY;
+		if (distance < blade.radius/2){
+			this.color = randomColor();
+			this.size = Math.random() * 2;
+			this.x -= directionX/distance;
+			this.y -= directionY/distance;
+			this.opacity++;
 		} else {
 			if (this.x !== this.baseX){
-				let dx = this.x - this.baseX;
-				this.x += dx/120;
-				this.size = Math.random() * 4;
-				if (dx < 1){
-					this.size = Math.random() * 4;
+				let dx = this.x - this.baseX//canvasCenter.x;
+				this.x -= dx/60;
+				this.size = Math.random() * 2;
+				if (dx > 1){
+					this.size = Math.random() * 2;
+					if (dx < blade.radius*2){
+						this.color = 'white';
+						this.size = 1;
+						this.x -= directionX;
+						if (dx){
 
+						}
+					}
 				}
 			}
 			if (this.y !== this.baseY){
-				let dy = this.y - this.baseY;
-				this.y += dy/120;
-				this.size = Math.random() * 4;
-				if (dy < 1){
-					this.size = Math.random() * 4;
-
+				let dy = this.y - this.baseY;//canvasCenter.y-50;
+				this.y -= dy/60;
+				this.size = Math.random() * 2;
+				if (dy > 1){
+					this.size = Math.random() * 2;
+					if (dy < blade.radius*2){
+						this.color = randomColor();
+						this.size = 1;
+						this.y -= directionY;
+					}
 				}
 			}
 		}
 		if (distance < blade.radius + 1){
-			this.size = Math.random() * 2;
-			this.color = 'white';
+			this.size = Math.random() * 1;
+			this.color = randomColor();
 		}
 	}
 }
@@ -189,10 +210,12 @@ function initialize() {
 				let currentOpacity = textCoordinates.data[currentDatapoint]/255; //127 returns as 0.5
 				let positionX = x + adjustX;
 				let positionY = y + adjustY;
-				particleArray.push(new Particle(positionX * 0.5, positionY * 2.0, currentOpacity));
+				particleArray.push(new Particle(positionX * 0.4, positionY * 1.6, currentOpacity));
 			}
 		}
 	}
+	
+	console.log(particleArray)
 
 	// for (let i = 0; i < 400; i++){
 	// 	let x = Math.random() * canvas.width/2;
