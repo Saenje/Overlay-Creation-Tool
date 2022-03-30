@@ -93,7 +93,7 @@ let adjustY = 400;
 const blade = {
 	x: null,
 	y: null,
-	radius: 16,
+	radius: 8,
 	paintRadius: 64,
 	absorbRadius: 64
 }
@@ -106,15 +106,15 @@ window.addEventListener('mousemove', function(position){
 
 
 let inputText = 'Extremely Long Username';
+let inputSize = 32;
 
 particleCanvas.fillStyle = 'green';
-particleCanvas.font = "32px 'Titillium Web'";
-particleCanvas.fillText(inputText, 0, 32);
+particleCanvas.textAlign = "center"
+particleCanvas.font = `${inputSize}px 'Titillium Web'`;
+particleCanvas.fillText(inputText, 300, 32);
 // particleCanvas.strokeStyle = 'white';
 // particleCanvas.strokeRect(4, 0, canvas.width-250, 40)
 const textCoordinates = particleCanvas.getImageData(0, 0, canvas.width*4, 2160);
-
-particleCanvas.fillText
 
 let canvasCenter = {
 	x: window.innerWidth/2,
@@ -151,50 +151,40 @@ class Particle {
 		let distance = Math.sqrt(dx * dx + dy * dy)
 		let forceDirectionX = dx / distance;
 		let forceDirectionY = dy / distance;
-		let maxDistance = blade.radius*4;
+		let maxDistance = blade.radius;
 		let force = (maxDistance - distance) / maxDistance;
 		let directionX = forceDirectionX * force * this.denisty;
 		let directionY = forceDirectionY * force * this.denisty;
-		if (distance < blade.radius/2){
+		if (distance < blade.radius){
 			this.color = randomColor();
 			this.size = Math.random() * 2;
-			this.x -= directionX/distance;
-			this.y -= directionY/distance;
-			this.opacity++;
+			this.x -= directionX;
+			this.y -= directionY;
 		} else {
 			if (this.x !== this.baseX){
 				let dx = this.x - this.baseX//canvasCenter.x;
-				this.x -= dx/60;
+				this.x += dx/distance;
 				this.size = Math.random() * 2;
-				if (dx > 1){
-					this.size = Math.random() * 2;
-					if (dx < blade.radius*2){
-						this.color = 'white';
-						this.size = 1;
-						this.x -= directionX;
-						if (dx){
-
-						}
+				if (dx > blade.x*2){
+					let originX = this.x - canvasCenter.x;
+					this.x -= originX/distance;
+					if (dx > blade.x-1){
+						this.x--;
 					}
 				}
 			}
 			if (this.y !== this.baseY){
 				let dy = this.y - this.baseY;//canvasCenter.y-50;
-				this.y -= dy/60;
+				this.y += dy/distance;
 				this.size = Math.random() * 2;
-				if (dy > 1){
-					this.size = Math.random() * 2;
-					if (dy < blade.radius*2){
-						this.color = randomColor();
-						this.size = 1;
-						this.y -= directionY;
+				if (dy > blade.y*2){
+					let originY = this.y - canvasCenter.y;
+					this.y -= originY/distance;
+					if (dy > blade.y-1){
+						this.y--;
 					}
 				}
 			}
-		}
-		if (distance < blade.radius + 1){
-			this.size = Math.random() * 1;
-			this.color = randomColor();
 		}
 	}
 }
