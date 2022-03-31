@@ -30,7 +30,7 @@ function randomColor() {
 	let b = parseInt(Math.random()*256)+192;
 	if (g > 240){
 		if (b > 240){
-			r = 255;
+			r = 192;
 		}
 	} else {
 		r = 0;
@@ -157,34 +157,20 @@ class Particle {
 		let directionY = forceDirectionY * force * this.denisty;
 		if (distance < blade.radius){
 			this.color = randomColor();
-			this.size = Math.random() * 2;
 			this.x -= directionX;
 			this.y -= directionY;
-		} else {
-			if (this.x !== this.baseX){
-				let dx = this.x - this.baseX//canvasCenter.x;
-				this.x += dx/distance;
-				this.size = Math.random() * 2;
-				if (dx > blade.x*2){
-					let originX = this.x - canvasCenter.x;
-					this.x -= originX/distance;
-					if (dx > blade.x-1){
-						this.x--;
-					}
-				}
-			}
-			if (this.y !== this.baseY){
-				let dy = this.y - this.baseY;//canvasCenter.y-50;
-				this.y += dy/distance;
-				this.size = Math.random() * 2;
-				if (dy > blade.y*2){
-					let originY = this.y - canvasCenter.y;
-					this.y -= originY/distance;
-					if (dy > blade.y-1){
-						this.y--;
-					}
-				}
-			}
+		}
+		if (this.x !== this.baseX){
+			let dx = this.x - this.baseX;
+			this.x += dx/distance;
+			this.size = Math.random() * 1.5 + 1;
+			this.opacity = Math.random() + 0.2;
+		}
+		if (this.y !== this.baseY){
+			let dy = this.y - this.baseY;
+			this.y += dy/distance;
+			this.size = Math.random() * 1.5 + 1;
+			this.opacity = Math.random() + 0.2;
 		}
 	}
 }
@@ -218,6 +204,7 @@ initialize();
 // console.log(particleArray);
 
 function animate(){
+	particleCanvas.fillStyle = this.color;
 	particleCanvas.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < particleArray.length; i++){
 		particleArray[i].draw();
