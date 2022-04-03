@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    overflow: hidden;
+    background-color: black;
+}
+
+body > * {
+    flex: 0 0 auto;
+    font-family: Titillium Web;
+    font-weight: 800;
+}
+
+#defaultAnimation {
+    filter: drop-shadow(0px 0px 4px rgba(120, 255, 255));
+    filter: drop-shadow(0px 0px 6px rgba(80, 192, 180));
+    filter: drop-shadow(0px 0px 8px rgb(0, 96, 120));
+    display: inline-flex;
+    width: 80px;
+    height: 80px;
+	position: absolute;
+    transform: translate(-50%, -36%);
+}
+
+#progressPercentage {
+    filter: drop-shadow(0px 0px 16px rgba(120, 255, 255));
+    font-size: 14px;
+    font-family: Titillium Web;
+    font-weight: 400;
+    color: cyan;
+	position: absolute;
+    transform: translate(-50%, 154%);
+    z-index: 2;
+}
