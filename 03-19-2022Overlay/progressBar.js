@@ -26,21 +26,6 @@ let 	subQuantity = 1,
 		barBlue = 120 + (supportMultiplier * 175 / range);
 		barRGB = `${barRed}, ${barGreen}, ${barBlue}`;
 
-function randomColor() {
-	let r = null;
-	let g = parseInt(Math.random()*256)+192;
-	let b = parseInt(Math.random()*256)+192;
-	if (g > 240){
-		if (b > 240){
-			r = 192;
-		}
-	} else {
-		r = 0;
-	}
-	let colorOpacity = (parseInt(Math.random()*256)+128)/255;
-	return `rgba(${r}, ${g}, ${b}, ${colorOpacity})`
-}
-
 console.log(`Bar Increment: ${increment},
 Percentage Completed: ${percentage},
 Support Multiplier: ${supportMultiplier},
@@ -55,25 +40,30 @@ let barWidth = 128;
 let barHeight = 128;
 
 function setup() {
-    		angleMode(DEGREES);
-			let canvas = createCanvas(barWidth, barHeight);
-			let x = (windowWidth - width) / 2;
-			let y = (windowHeight - height) / 2;
-			canvas.position(x, y);
+    angleMode(DEGREES);
+	let canvas = createCanvas(barWidth, barHeight);
+	let x = (windowWidth - width) / 2;
+	let y = (windowHeight - height) / 2;
+	canvas.position(x, y);
 }
 
 //Progress bar element		
+       
 function draw() {
-			stroke(180, 180, 180, 80);
-			strokeWeight(trackThickness);
-			noFill();
-			arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, progressBounds.end);
-			stroke(barRed, barGreen, barBlue);
-			strokeWeight(barThickness);
-			noFill();
-			arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, currentProgress);
-			noLoop();
+	stroke(180, 180, 180, 80);
+	strokeWeight(trackThickness);
+	noFill();
+	arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, progressBounds.end);
+	stroke(barRed, barGreen, barBlue);
+	strokeWeight(barThickness);
+	noFill();
+	arc(barWidth/2, barHeight/2, 96, 96, progressBounds.start, currentProgress);
+	noLoop();
+    redraw();
 }
+
+const progressPercentage = document.getElementById('progressPercentage');
+progressPercentage.innerHTML = `${roundedPercentage}`;
 
 
 
