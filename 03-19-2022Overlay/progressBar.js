@@ -41,6 +41,7 @@ const ring = function(sketch){
 
 	//Progress element	
 	sketch.draw = function(){
+		sketch.clear();
 		sketch.stroke(192, 192, 192, 192);
 		sketch.strokeWeight(bar.frame);
 		sketch.noFill();
@@ -49,36 +50,41 @@ const ring = function(sketch){
 		sketch.strokeWeight(bar.thickness);
 		sketch.noFill();
 		sketch.arc(x/2, y/2, bar.width, bar.height, bar.start, bar.current);
-		sketch.noLoop();
 	}
 }
 
 let progress = new p5(ring);
 
-let incrementRates = [1, 20, 50, 80, 100]
 
 
-bar.maximum = 10000
-bar.change = 7000
-
-bar.display = (bar.percentage/100).toFixed(2)
-bar.update = $('#percentage').text(bar.display)
-
-function increment(){
-	let value = +bar.update.text()*100;
-	console.log(value);
-	if (value < bar.maximum){
-		value += bar.change/100;
-		display = (value/100).toFixed(2);
-		bar.update.text(display);
-	} else {
-		bar.update.text((bar.maximum/100).toFixed(2))
+function updatePercentage(a, b, c){
+	bar.display = (bar.percentage/100).toFixed(2);
+	bar.update = $('#percentage').text(bar.display);
+	bar.follows += a;
+	bar.subs += b;
+	bar.cheers += c;
+	this.approaching = 4000;
+	console.log(bar.percentage)
+	function increment(){
+		this.initial = +bar.display*100;
+		console.log(this.initial);
+		if (this.initial < this.approaching){
+			this.initial += 1;
+			bar.display = (this.initial/100).toFixed(2);
+			bar.update.text(bar.display);
+			progress.redraw();
+			setTimeout(increment)
+		} else {
+			bar.update.text((this.approaching/100).toFixed(2))
+		}
 	}
-	setTimeout(increment, bar.maximum/1000)
+	increment();
 }
 
+console.log(bar.percentage);
 
-increment();
+updatePercentage(0,6,0);
+
 
 
 
