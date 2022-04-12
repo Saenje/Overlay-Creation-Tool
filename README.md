@@ -17,9 +17,10 @@ As the project develops, this section will be populated with commonly encountere
 ## Author
 
 Jetrospect (Sean)
-(https://twitch.tv/Jetrospect)
-(https://twitter.com/theJetrospect)
 
+###Contact and Social Platforms:
+[TheJetrospect (Twitter)](https://twitter.com/theJetrospect)
+[Jetrospect (Twitch)](https://twitch.tv/Jetrospect)
 
 ## Version History
 
