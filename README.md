@@ -8,7 +8,7 @@ This applications will ease the process of creating a tie between StreamElements
 
 ## Roadmap
 
-I hope that tool proves useful to anyone that stumbles upon it. Any recommendations to improve optimization or ease of are welcome in the discussions. Please be advised that every bit of this programming I have researched, self-taught myself and it may require many edits before reaching its full potential. As the project progresses, I will populate this with section with ideas to be added in the future.
+I hope that tool proves useful to anyone that stumbles upon it. Any recommendations to improve optimization and/or ease of use are welcome in the discussions. Please be advised that every bit of this programming I have researched, self-taught myself and it may require many edits before reaching its full potential. As the project progresses, I will populate this with section with ideas to be added in the future.
 
 ## Help
 
