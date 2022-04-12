@@ -19,8 +19,9 @@ As the project develops, this section will be populated with commonly encountere
 Jetrospect (Sean)
 
 * Contact and Social Platforms:
-   * [TheJetrospect (Twitter)](https://twitter.com/theJetrospect)
-   * [Jetrospect (Twitch)](https://twitch.tv/Jetrospect)
+  * [Jetrospect (Patreon)](https://www.patreon.com/jetrospect)
+  * [TheJetrospect (Twitter)](https://twitter.com/theJetrospect)
+  * [Jetrospect (Twitch)](https://twitch.tv/Jetrospect)
 
 ## Version History
 
