@@ -4,7 +4,7 @@ A project being developed to simplify the creation of custom StreamElements widg
 
 ## Description
 
-This applications will ease the process of creating a tie between StreamElements event lists, labels, logo animations and supporter alerts. It will be used to generate blocks of code that will be transferrable to the StreamElements custom code dialog tabs with minimal edits for it to successfully operate as a browser source.
+This application contain and aesthetic UI and will ease the process of creating a smooth tie between StreamElements event lists, labels, logo animations and supporter alerts. It will be used to generate blocks of code that will be transferrable to the StreamElements custom code dialog tabs with minimal edits for it to successfully operate as a browser source.
 
 ## Roadmap
 
