@@ -1,4 +1,4 @@
-# Jetrospect Overlay Tool
+# Jetrospect's Overlay Creation Tool
 
 A project being developed to simplify the creation of custom StreamElements widgets to aid Twitch streamers, limiting the streamer's expenses to possess a aesthetic stream overlay.
 
