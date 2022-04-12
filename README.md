@@ -34,5 +34,13 @@ This project is licensed under Jetrospect - see the LICENSE.md file for details.
 
 ## Acknowledgments
 
+Libraries and utilities that contributed to this tool:
+* [MEAN.JS](http://meanjs.org/)
+* [React.JS](https://reactjs.org/)
+* [p5.JS](https://p5js.org/)
+* [jQuery](https://jquery.com/)
+
+
+
 The following is a list of code tutorials and snippets that assisted me in the creation of this tool:
 * [Image into Particles (vanilla JS)](https://codepen.io/franksLaboratory/pen/dyYGMwQ)
