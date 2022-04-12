@@ -25,7 +25,7 @@ Jetrospect (Sean)
 
 ## Version History
 
-* 0.1
+* 0.0
     * Preliminary/Inoperable state
 
 ## License
